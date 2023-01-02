@@ -7,7 +7,7 @@
 		<Description>Message Queue</Description>
 		<Authors>Yusuf Yorulmaz</Authors>
 		<Company>yorulmaz software</Company>
-		<Version>0.0.1</Version>
+		<Version>0.0.2</Version>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<!--<GenerateDocumentationFile>true</GenerateDocumentationFile>-->
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -25,7 +25,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-		<PackageReference Include="CronExpressionDescriptor" Version="2.16.0" />
 	</ItemGroup>
 
 	<ItemGroup>
