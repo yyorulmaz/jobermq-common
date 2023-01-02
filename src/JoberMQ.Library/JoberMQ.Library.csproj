@@ -1,13 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
+		<EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
 
 		<Copyright>2023 © Yusuf Yorulmaz</Copyright>
 		<Description>Message Queue</Description>
 		<Authors>Yusuf Yorulmaz</Authors>
 		<Company>yorulmaz software</Company>
-		<Version>0.0.2</Version>
+		<Version>0.0.3</Version>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<!--<GenerateDocumentationFile>true</GenerateDocumentationFile>-->
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
