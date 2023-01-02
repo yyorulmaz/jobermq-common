@@ -12,7 +12,7 @@
 		<!--<GenerateDocumentationFile>true</GenerateDocumentationFile>-->
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/yyorulmaz/jobermq-server</RepositoryUrl>
+		<RepositoryUrl>https://github.com/yyorulmaz/jobermq-library</RepositoryUrl>
 		<PackageTags>repository;database repository;helpers;method helpers;round robin;roundrobin;round robin helper;</PackageTags>
 		<PackageDescription>Message Queue</PackageDescription>
 		<IncludeSymbols>true</IncludeSymbols>
