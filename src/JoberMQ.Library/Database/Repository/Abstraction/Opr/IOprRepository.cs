@@ -30,11 +30,12 @@ namespace JoberMQ.Library.Database.Repository.Abstraction.Opr
         event Action<D> ChangedRemoved;
         #endregion
 
+        void Setups();
+        void CreateFolder();
+        void DataGroupingAndSize();
+        void CreateStream();
         bool ImportTextDataToSetMemDb();
 
-        bool CreateDatabase();
-        bool Setup();
-        bool DataGroupingAndSize();
         int ArsiveFileCounter { get; set; }
     }
 }

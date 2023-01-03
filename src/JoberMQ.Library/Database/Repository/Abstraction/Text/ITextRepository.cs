@@ -10,15 +10,15 @@ namespace JoberMQ.Library.Database.Repository.Abstraction.Text
     public interface ITextRepository<T> where T : DboPropertyGuidBase, new()
     {
         #region Create Folder
-        bool CreateFolder();
+        void CreateFolder();
         #endregion
 
         #region DataGroupingAndSize
-        bool DataGroupingAndSize();
+        void DataGroupingAndSize();
         #endregion
 
-        #region Setup
-        bool Setup();
+        #region Create Stream
+        void CreateStream();
         #endregion
 
         #region Write

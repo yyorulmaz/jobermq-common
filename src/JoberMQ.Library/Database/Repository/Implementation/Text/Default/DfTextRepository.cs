@@ -23,7 +23,7 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Text.Default
         #endregion
 
         #region Create Folder
-        public bool CreateFolder()
+        public void CreateFolder()
         {
             try
             {
@@ -32,80 +32,81 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Text.Default
 
                 if (!Directory.Exists(Path.Combine(new string[] { textFileConfig.DbPath, textFileConfig.DbFolderPath })))
                     Directory.CreateDirectory(Path.Combine(new string[] { textFileConfig.DbPath, textFileConfig.DbFolderPath }));
-
-                return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new ArgumentException("Could not create folders error occurred.\nError Message Detail : " + ex.Message);
             }
         }
         #endregion
 
         #region DataGroupingAndSize
-        public bool DataGroupingAndSize()
-        {
-            //tüm dosya listesini aldım
-            var fullFileList = GetFileListFull();
-            if (fullFileList == null || fullFileList.Count == 0)
-                return true;
-
-            //tüm verileri aldım
-            var paths = fullFileList.Select(x => x.FullPath).ToList();
-            var fullData = ReadLineFile(paths);
-            if (fullData.Count == 0)
-                return true;
-
-            //tüm veriyi grupladım
-            var groupDatas = GroupingData(fullData);
-
-            //temp dosyası var ise sildim ve yenisini oluşturdum
-            var tempFile = GetArsiveFileFullPath(0);
-            File.Delete(tempFile);
-            File.Create(tempFile);
-
-            //grupladığım veriyi temp dosyasına yazdım
-            using (FileStream fs = FileStreamCreate(tempFile, 32768))
-            {
-                using (StreamWriter sw = StreamWriterCreate(fs))
-                {
-                    foreach (var item in groupDatas)
-                        sw.WriteLine(JsonConvert.SerializeObject(item, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-                }
-            }
-
-            //temp dosyası hariç tüm dosyaları sildim
-            var deleteFileList = fullFileList.Where(x => x.FullPath != tempFile).ToList();
-            foreach (var item in deleteFileList)
-                File.Delete(item.FullPath);
-
-
-            //temp dosyasını 1 numaralı arşiv dosyasına taşıdım ve arşiv numarasını 2 olarak değiştirdim
-            var arsiveFile = GetArsiveFileFullPath(1);
-            File.Move(tempFile, arsiveFile);
-            arsiveFileCounter = 2;
-
-            return true;
-        }
-        #endregion
-
-        #region Setup
-        public bool Setup()
+        public void DataGroupingAndSize()
         {
             try
             {
-                if (isSetup)
-                    return true;
+                //tüm dosya listesini aldım
+                var fullFileList = GetFileListFull();
+                if (fullFileList == null || fullFileList.Count == 0)
+                    return;
 
+                //tüm verileri aldım
+                var paths = fullFileList.Select(x => x.FullPath).ToList();
+                var fullData = ReadLineFile(paths);
+                if (fullData.Count == 0)
+                    return;
+
+                //tüm veriyi grupladım
+                var groupDatas = GroupingData(fullData);
+
+                //temp dosyası var ise sildim ve yenisini oluşturdum
+                var tempFile = GetArsiveFileFullPath(0);
+                File.Delete(tempFile);
+                File.Create(tempFile);
+
+                //grupladığım veriyi temp dosyasına yazdım
+                using (FileStream fs = FileStreamCreate(tempFile, 32768))
+                {
+                    using (StreamWriter sw = StreamWriterCreate(fs))
+                    {
+                        foreach (var item in groupDatas)
+                            sw.WriteLine(JsonConvert.SerializeObject(item, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
+                    }
+                }
+
+                //temp dosyası hariç tüm dosyaları sildim
+                var deleteFileList = fullFileList.Where(x => x.FullPath != tempFile).ToList();
+                foreach (var item in deleteFileList)
+                    File.Delete(item.FullPath);
+
+
+                //temp dosyasını 1 numaralı arşiv dosyasına taşıdım ve arşiv numarasını 2 olarak değiştirdim
+                var arsiveFile = GetArsiveFileFullPath(1);
+                File.Move(tempFile, arsiveFile);
+                arsiveFileCounter = 2;
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("Error DataGroupingAndSize()\nError Message Detail : " + ex.Message);
+            }
+        }
+        #endregion
+
+        #region Create Stream
+        public void CreateStream()
+        {
+            if (isSetup)
+                return;
+
+            try
+            {
                 mutex = MutexCreate(false, textFileConfig.DbFileName);
                 fileStream = FileStreamCreate(baseFileFullPath, 32768);
                 streamWriter = StreamWriterCreate(fileStream);
-
-                return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new ArgumentException("Error CreateStream().\nError Message Detail : " + ex.Message);
             }
         }
         #endregion
