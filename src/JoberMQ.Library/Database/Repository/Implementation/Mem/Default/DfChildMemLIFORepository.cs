@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 
 namespace JoberMQ.Library.Database.Repository.Implementation.Mem.Default
 {
-    internal class DfChildMemLIFORepository<TKey, TValue> : IChildMemLIFORepository<TKey, TValue>
+    public class DfChildMemLIFORepository<TKey, TValue> : IChildMemLIFORepository<TKey, TValue>
     {
         #region Constructor
         public DfChildMemLIFORepository(IMemRepository<TKey, TValue> masterData)

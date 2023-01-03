@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace JoberMQ.Library.Database.Repository.Abstraction.Opr
 {
-    internal interface IOprRepository<D>
+    public interface IOprRepository<D>
     where D : DboPropertyGuidBase, new()
     {
         IMemRepository<Guid, D> DbMem { get; set; }
@@ -30,11 +30,12 @@ namespace JoberMQ.Library.Database.Repository.Abstraction.Opr
         event Action<D> ChangedRemoved;
         #endregion
 
+        void Setups();
+        void CreateFolder();
+        void DataGroupingAndSize();
+        void CreateStream();
         bool ImportTextDataToSetMemDb();
 
-        bool CreateDatabase();
-        bool Setup();
-        bool DataGroupingAndSize();
         int ArsiveFileCounter { get; set; }
     }
 }

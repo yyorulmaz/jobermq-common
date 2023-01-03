@@ -1,6 +1,6 @@
 ﻿namespace JoberMQ.Library.Database.Models
 {
-    internal class DataLogFileModel
+    public class DataLogFileModel
     {
         public string FullPath { get; set; }
         public string FileName { get; set; }

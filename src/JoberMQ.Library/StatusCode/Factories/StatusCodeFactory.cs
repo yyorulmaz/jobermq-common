@@ -7,9 +7,9 @@ using System.Collections.Concurrent;
 
 namespace JoberMQ.Library.StatusCode.Factories
 {
-    internal class StatusCodeFactory
+    public class StatusCodeFactory
     {
-        internal static IStatusCode Create(StatusCodeFactoryEnum factory, ConcurrentDictionary<string, StatusCodeModel> statusCodeData, StatusCodeMessageLanguageEnum defaultStatusCodeMessageLanguage)
+        public static IStatusCode Create(StatusCodeFactoryEnum factory, ConcurrentDictionary<string, StatusCodeModel> statusCodeData, StatusCodeMessageLanguageEnum defaultStatusCodeMessageLanguage)
         {
             IStatusCode statusCode;
 

@@ -4,9 +4,9 @@ using JoberMQ.Library.RoundRobin.Implementation.Default;
 
 namespace JoberMQ.Library.RoundRobin.Factories
 {
-    internal class RoundRobinFactory
+    public class RoundRobinFactory
     {
-        internal static IRoundRobin<T> Create<T>(RoundRobinFactoryEnum factory)
+        public static IRoundRobin<T> Create<T>(RoundRobinFactoryEnum factory)
         {
             IRoundRobin<T> roundRobin;
 

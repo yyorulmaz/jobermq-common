@@ -11,9 +11,9 @@ using System.Text;
 
 namespace JoberMQ.Library.Method.Factories
 {
-    internal class MethodFactory
+    public class MethodFactory
     {
-        internal static IMethod Create(StatusCodeFactoryEnum factory, ConcurrentDictionary<string, StatusCodeModel> statusCodeData, StatusCodeMessageLanguageEnum defaultStatusCodeMessageLanguage)
+        public static IMethod Create(StatusCodeFactoryEnum factory, ConcurrentDictionary<string, StatusCodeModel> statusCodeData, StatusCodeMessageLanguageEnum defaultStatusCodeMessageLanguage)
         {
             IMethod method;
 

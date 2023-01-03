@@ -9,17 +9,17 @@ using System.Collections.Generic;
 
 namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
 {
-    internal class DfOprRepository<D> : IOprRepository<D>
+    public class DfOprRepository<D> : IOprRepository<D>
         where D : DboPropertyGuidBase, new()
     {
-        internal DfOprRepository(
+        public DfOprRepository(
             IMemRepository<Guid, D> dbMem,
             ITextRepository<D> dbText)
         {
             this.dbMem = dbMem;
             this.dbText = dbText;
         }
-        internal DfOprRepository()
+        public DfOprRepository()
         {
 
         }
@@ -95,6 +95,20 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
         public event Action<D> ChangedRemoved;
         #endregion
 
+        public void Setups()
+        {
+            CreateFolder();
+            DataGroupingAndSize();
+            ImportTextDataToSetMemDb();
+            CreateStream();
+        }
+
+        public void CreateFolder()
+            => dbText.CreateFolder();
+        public void DataGroupingAndSize()
+           => dbText.DataGroupingAndSize();
+        public void CreateStream()
+            => dbText.CreateStream();
         public bool ImportTextDataToSetMemDb()
         {
             var datas = dbText.ReadAllDataGrouping(true);
@@ -106,15 +120,6 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
             return true;
         }
 
-        public bool CreateDatabase()
-            => dbText.CreateFolder();
-        public bool Setup()
-            => dbText.Setup();
-
-        public bool DataGroupingAndSize()
-            => dbText.DataGroupingAndSize();
-
         public int ArsiveFileCounter { get => dbText.ArsiveFileCounter; set => dbText.ArsiveFileCounter = value; }
-
     }
 }

@@ -4,7 +4,7 @@ using JoberMQ.Library.StatusCode.Models;
 
 namespace JoberMQ.Library.StatusCode.Abstraction
 {
-    internal interface IStatusCode
+    public interface IStatusCode
     {
         string GetStatusMessage(string statusCode);
         string GetStatusMessage(string statusCode, StatusCodeMessageLanguageEnum language);
