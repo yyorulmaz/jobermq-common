@@ -5,9 +5,9 @@ using System.Collections.Concurrent;
 
 namespace JoberMQ.Library.Database.Factories
 {
-    internal class MemFactory
+    public class MemFactory
     {
-        internal static IMemRepository<TKey, TValue> CreateMem<TKey, TValue>(MemFactoryEnum memFactory, MemDataFactoryEnum memDataFactory, ConcurrentDictionary<TKey, TValue> masterData)
+        public static IMemRepository<TKey, TValue> CreateMem<TKey, TValue>(MemFactoryEnum memFactory, MemDataFactoryEnum memDataFactory, ConcurrentDictionary<TKey, TValue> masterData)
         {
             IMemRepository<TKey, TValue> memRepository;
 

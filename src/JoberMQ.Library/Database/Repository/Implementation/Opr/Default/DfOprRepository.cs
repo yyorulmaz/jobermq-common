@@ -9,17 +9,17 @@ using System.Collections.Generic;
 
 namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
 {
-    internal class DfOprRepository<D> : IOprRepository<D>
+    public class DfOprRepository<D> : IOprRepository<D>
         where D : DboPropertyGuidBase, new()
     {
-        internal DfOprRepository(
+        public DfOprRepository(
             IMemRepository<Guid, D> dbMem,
             ITextRepository<D> dbText)
         {
             this.dbMem = dbMem;
             this.dbText = dbText;
         }
-        internal DfOprRepository()
+        public DfOprRepository()
         {
 
         }

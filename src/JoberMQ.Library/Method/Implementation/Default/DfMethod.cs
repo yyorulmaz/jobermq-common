@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace JoberMQ.Library.Method.Implementation.Default
 {
-    internal class DfMethod : IMethod
+    public class DfMethod : IMethod
     {
         public async Task<MethodReturnModel<byte[]>> MethodRun(Expression<Action> methodCall)
             => await MethodRunner(MethodProperty(methodCall));

@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace JoberMQ.Library.Database.Repository.Implementation.Text.Default
 {
-    internal class DfTextRepository<T> : ITextRepository<T>
+    public class DfTextRepository<T> : ITextRepository<T>
          where T : DboPropertyGuidBase, new()
     {
         #region Constructor

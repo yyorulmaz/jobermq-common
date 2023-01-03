@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace JoberMQ.Library.Database.Repository.Abstraction.Mem
 {
     //IDb
-    internal interface IMemRepository<TKey, TValue>
+    public interface IMemRepository<TKey, TValue>
     {
         #region Data
         ConcurrentDictionary<TKey, TValue> MasterData { get; }

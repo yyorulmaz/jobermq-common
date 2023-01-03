@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace JoberMQ.Library.Database.Repository.Implementation.Mem.Default
 {
-    internal class DfMemRepository<TKey, TValue> : IMemRepository<TKey, TValue>
+    public class DfMemRepository<TKey, TValue> : IMemRepository<TKey, TValue>
     {
         #region Constructor
         public DfMemRepository(ConcurrentDictionary<TKey, TValue> masterData)

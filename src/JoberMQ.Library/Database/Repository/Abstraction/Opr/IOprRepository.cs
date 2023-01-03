@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace JoberMQ.Library.Database.Repository.Abstraction.Opr
 {
-    internal interface IOprRepository<D>
+    public interface IOprRepository<D>
     where D : DboPropertyGuidBase, new()
     {
         IMemRepository<Guid, D> DbMem { get; set; }

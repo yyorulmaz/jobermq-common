@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace JoberMQ.Library.StatusCode.Implementation.Default
 {
-    internal class DfStatusCode : IStatusCode
+    public class DfStatusCode : IStatusCode
     {
         private readonly IMemRepository<string, StatusCodeModel> memRepo;
         private readonly StatusCodeMessageLanguageEnum statusCodeMessageLanguage;

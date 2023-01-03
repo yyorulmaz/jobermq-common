@@ -3,7 +3,7 @@
 namespace JoberMQ.Library.Database.Repository.Abstraction.Mem
 {
     //IDbChild
-    internal interface IChildMemRepository<TKey, TValue>
+    public interface IChildMemRepository<TKey, TValue>
     {
         #region Data
         IMemRepository<TKey, TValue> MasterData { get; }

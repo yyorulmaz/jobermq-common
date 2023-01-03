@@ -7,7 +7,7 @@ using System.Text;
 
 namespace JoberMQ.Library.Database.Repository.Abstraction.Text
 {
-    internal interface ITextRepository<T> where T : DboPropertyGuidBase, new()
+    public interface ITextRepository<T> where T : DboPropertyGuidBase, new()
     {
         #region Create Folder
         bool CreateFolder();

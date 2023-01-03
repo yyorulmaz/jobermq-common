@@ -3,7 +3,7 @@
 namespace JoberMQ.Library.Database.Repository.Abstraction.Mem
 {
     //IDbChildLIFO
-    internal interface IChildMemLIFORepository<TKey, TValue> : IChildMemRepository<TKey, TValue>
+    public interface IChildMemLIFORepository<TKey, TValue> : IChildMemRepository<TKey, TValue>
     {
         #region Data
         ConcurrentStack<TValue> ChildData { get; }
