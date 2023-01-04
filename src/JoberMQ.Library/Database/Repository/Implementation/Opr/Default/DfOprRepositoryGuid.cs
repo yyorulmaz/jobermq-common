@@ -13,7 +13,7 @@ using System.Dynamic;
 
 namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
 {
-    public class DfOprRepository<TKey, TValue> : IOprRepository<TKey, TValue>
+    public class DfOprRepositoryGuid<TValue> : IOprRepositoryGuid<TValue>
         where TValue : DboPropertyGuidBase, new()
     {
         //public DfOprRepository(
@@ -24,21 +24,21 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
         //    this.dbText = dbText;
         //}
 
-        public DfOprRepository(MemFactoryEnum memFactory, MemDataFactoryEnum memDataFactory, ConcurrentDictionary<TKey, TValue> memMasterData, TextFactoryEnum textFactory, TextFileConfigModel textFileConfig)
+        public DfOprRepositoryGuid(MemFactoryEnum memFactory, MemDataFactoryEnum memDataFactory, ConcurrentDictionary<Guid, TValue> memMasterData, TextFactoryEnum textFactory, TextFileConfigModel textFileConfig)
         {
-            this.dbMem = MemFactory.Create<TKey, TValue>(memFactory, memDataFactory, memMasterData);
+            this.dbMem = MemFactory.Create<Guid, TValue>(memFactory, memDataFactory, memMasterData);
             this.dbText = TextFactory.Create<TValue>(textFactory, textFileConfig);
         }
 
-        private IMemRepository<TKey, TValue> dbMem;
-        public IMemRepository<TKey, TValue> DbMem { get => dbMem; set => dbMem = value; }
+        private IMemRepository<Guid, TValue> dbMem;
+        public IMemRepository<Guid, TValue> DbMem { get => dbMem; set => dbMem = value; }
         private ITextRepository<TValue> dbText;
         public ITextRepository<TValue> DbText { get => dbText; set => dbText = value; }
 
         #region CRUD
-        public TValue Get(TKey id) => dbMem.Get(id);
+        public TValue Get(Guid id) => dbMem.Get(id);
         public List<TValue> GetAll(Func<TValue, bool> filter = null) => dbMem.GetAll(filter);
-        public virtual bool Add(TKey key, TValue dbo)
+        public virtual bool Add(Guid key, TValue dbo)
         {
             var processTime = DateHelper.GetUniversalNow();
             dbo.CreateDate = processTime;
@@ -51,7 +51,7 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
 
             return true;
         }
-        public virtual bool Update(TKey key, TValue dbo)
+        public virtual bool Update(Guid key, TValue dbo)
         {
             var processTime = DateHelper.GetUniversalNow();
             dbo.UpdateDate = processTime;
@@ -64,7 +64,7 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
 
             return true;
         }
-        public virtual bool Delete(TKey key, TValue dbo)
+        public virtual bool Delete(Guid key, TValue dbo)
         {
             var processTime = DateHelper.GetUniversalNow();
             dbo.DataStatusType = DataStatusTypeEnum.Delete;
@@ -77,14 +77,14 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
             return true;
         }
 
-        public bool Commit(TKey key, TValue dbo)
+        public bool Commit(Guid key, TValue dbo)
         {
             dbo.IsTransactionCompleted = true;
             dbo.TransactionDate = DateHelper.GetUniversalNow();
 
             return Add(key, dbo);
         }
-        public bool Rollback(TKey key, TValue dbo)
+        public bool Rollback(Guid key, TValue dbo)
         {
             dbo.IsTransactionCompleted = false;
             dbo.TransactionDate = DateHelper.GetUniversalNow();
@@ -103,7 +103,7 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
         {
             CreateFolder();
             DataGroupingAndSize();
-            //ImportTextDataToSetMemDb();
+            ImportTextDataToSetMemDb();
             CreateStream();
         }
 
@@ -116,18 +116,14 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
         
 
 
-        //public void ImportTextDataToSetMemDb()
-        //{
-        //    var datas = dbText.ReadAllDataGrouping(true);
+        public void ImportTextDataToSetMemDb()
+        {
+            var datas = dbText.ReadAllDataGrouping(true);
 
-        //    if (datas != null)
-        //        foreach (var data in datas)
-        //            dbMem.Add(data.Id, data);
-
-
-
-        //    //return true;
-        //}
+            if (datas != null)
+                foreach (var data in datas)
+                    dbMem.Add(data.Id, data);
+        }
 
         public int ArsiveFileCounter { get => dbText.ArsiveFileCounter; set => dbText.ArsiveFileCounter = value; }
     }
