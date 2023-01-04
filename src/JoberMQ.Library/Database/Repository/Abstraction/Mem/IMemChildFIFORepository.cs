@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 
 namespace JoberMQ.Library.Database.Repository.Abstraction.Mem
 {
-    //IDb
-    public interface IMemRepository<TKey, TValue>
+    //IDbChildFIFO
+    //public interface IChildMemFIFORepository<TKey, TValue> : IMemChildRepository<TKey, TValue>
+    //{
+    //    #region Data
+    //    ConcurrentQueue<TValue> ChildData { get; }
+    //    #endregion
+    //}
+    public interface IMemChildFIFORepository<TKey, TValue>
     {
         #region Data
-        ConcurrentDictionary<TKey, TValue> MasterData { get; }
+        IMemRepository<TKey, TValue> MasterData { get; }
+        ConcurrentQueue<TValue> ChildData { get; }
         #endregion
 
         #region Count
@@ -16,17 +22,13 @@ namespace JoberMQ.Library.Database.Repository.Abstraction.Mem
         #endregion
 
         #region CRUD
-        TValue Get(TKey key);
-        TValue Get(Func<TValue, bool> filter);
-        List<TValue> GetAll(Func<TValue, bool> filter = null);
+        TValue Get();
         bool Add(TKey key, TValue value);
-        bool Update(TKey key, TValue value);
         TValue Remove(TKey key);
         #endregion
 
         #region Changed
         event Action<TKey, TValue> ChangedAdded;
-        event Action<TKey, TValue> ChangedUpdated;
         event Action<TKey, TValue> ChangedRemoved;
         #endregion
     }

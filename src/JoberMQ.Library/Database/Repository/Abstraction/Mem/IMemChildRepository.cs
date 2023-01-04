@@ -3,7 +3,7 @@
 namespace JoberMQ.Library.Database.Repository.Abstraction.Mem
 {
     //IDbChild
-    public interface IChildMemRepository<TKey, TValue>
+    public interface IMemChildRepository<TKey, TValue>
     {
         #region Data
         IMemRepository<TKey, TValue> MasterData { get; }
@@ -21,8 +21,8 @@ namespace JoberMQ.Library.Database.Repository.Abstraction.Mem
         #endregion
 
         #region Changed
-        event Action<TValue> ChangedAdded;
-        event Action<TValue> ChangedRemoved;
+        event Action<TKey, TValue> ChangedAdded;
+        event Action<TKey, TValue> ChangedRemoved;
         #endregion
     }
 }

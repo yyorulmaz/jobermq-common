@@ -45,29 +45,29 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Mem.Default
         {
             var result = masterData.TryAdd(key, value);
             if (result)
-                ChangedAdded?.Invoke(value);
+                ChangedAdded?.Invoke(key, value);
             return result;
         }
         public bool Update(TKey key, TValue value)
         {
             var result = masterData.TryUpdate(key, value, value);
             if (result)
-                ChangedUpdated?.Invoke(value);
+                ChangedUpdated?.Invoke(key, value);
             return result;
         }
         public TValue Remove(TKey key)
         {
             masterData.TryRemove(key, out TValue value);
             if (value != null)
-                ChangedRemoved?.Invoke(value);
+                ChangedRemoved?.Invoke(key, value);
             return value;
         }
         #endregion
 
         #region Changed
-        public event Action<TValue> ChangedAdded;
-        public event Action<TValue> ChangedUpdated;
-        public event Action<TValue> ChangedRemoved;
+        public event Action<TKey, TValue> ChangedAdded;
+        public event Action<TKey, TValue> ChangedUpdated;
+        public event Action<TKey, TValue> ChangedRemoved;
         #endregion
     }
 }
