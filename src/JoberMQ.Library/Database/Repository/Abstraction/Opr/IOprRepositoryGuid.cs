@@ -6,22 +6,22 @@ using System.Collections.Generic;
 
 namespace JoberMQ.Library.Database.Repository.Abstraction.Opr
 {
-    public interface IOprRepository<TKey, TValue>
+    public interface IOprRepositoryGuid<TValue>
     where TValue : DboPropertyGuidBase, new()
     {
-        IMemRepository<TKey, TValue> DbMem { get; set; }
+        IMemRepository<Guid, TValue> DbMem { get; set; }
         ITextRepository<TValue> DbText { get; set; }
 
 
         #region CRUD
-        TValue Get(TKey id);
+        TValue Get(Guid id);
         List<TValue> GetAll(Func<TValue, bool> filter = null);
-        bool Add(TKey key, TValue dbo);
-        bool Update(TKey key, TValue dbo);
-        bool Delete(TKey key, TValue dbo);
+        bool Add(Guid key, TValue dbo);
+        bool Update(Guid key, TValue dbo);
+        bool Delete(Guid key, TValue dbo);
 
-        bool Commit(TKey key, TValue dbo);
-        bool Rollback(TKey key, TValue dbo);
+        bool Commit(Guid key, TValue dbo);
+        bool Rollback(Guid key, TValue dbo);
         #endregion
 
         #region Changed
@@ -34,7 +34,7 @@ namespace JoberMQ.Library.Database.Repository.Abstraction.Opr
         void CreateFolder();
         void DataGroupingAndSize();
         void CreateStream();
-        //void ImportTextDataToSetMemDb();
+        void ImportTextDataToSetMemDb();
 
         int ArsiveFileCounter { get; set; }
     }

@@ -15,7 +15,7 @@ namespace JoberMQ.Library.StatusCode.Implementation.Default
         private readonly StatusCodeMessageLanguageEnum statusCodeMessageLanguage;
         public DfStatusCode(ConcurrentDictionary<string, StatusCodeModel> statusCodeData, StatusCodeMessageLanguageEnum defaultStatusCodeMessageLanguage)
         {
-            this.memRepo = MemFactory.CreateMem<string, StatusCodeModel>(Database.Enums.MemFactoryEnum.Default, Database.Enums.MemDataFactoryEnum.Data, statusCodeData);
+            this.memRepo = MemFactory.Create<string, StatusCodeModel>(Database.Enums.MemFactoryEnum.Default, Database.Enums.MemDataFactoryEnum.Data, statusCodeData);
             this.statusCodeMessageLanguage = defaultStatusCodeMessageLanguage;
         }
 
