@@ -4,13 +4,13 @@ using System.Collections.Concurrent;
 
 namespace JoberMQ.Library.Database.Repository.Implementation.Mem.Default
 {
-    public class DfChildMemFIFORepository<TKey, TValue> : IChildMemFIFORepository<TKey, TValue>
+    public class DfMemChildLIFORepository<TKey, TValue> : IMemChildLIFORepository<TKey, TValue>
     {
         #region Constructor
-        public DfChildMemFIFORepository(IMemRepository<TKey, TValue> masterData)
+        public DfMemChildLIFORepository(IMemRepository<TKey, TValue> masterData)
         {
             this.masterData = masterData;
-            childData = new ConcurrentQueue<TValue>();
+            childData = new ConcurrentStack<TValue>();
         }
         #endregion
 
@@ -19,8 +19,8 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Mem.Default
         public IMemRepository<TKey, TValue> MasterData => masterData;
 
 
-        private readonly ConcurrentQueue<TValue> childData;
-        public ConcurrentQueue<TValue> ChildData => childData;
+        private readonly ConcurrentStack<TValue> childData;
+        public ConcurrentStack<TValue> ChildData => childData;
         #endregion
 
         #region Count
@@ -33,17 +33,13 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Mem.Default
             childData.TryPeek(out var value);
             return value;
         }
-        public TValue Get(TKey key)
-        {
-            throw new NotImplementedException();
-        }
         public bool Add(TKey key, TValue value)
         {
             try
             {
                 masterData.Add(key, value);
-                childData.Enqueue(value);
-                ChangedAdded?.Invoke(value);
+                childData.Push(value);
+                ChangedAdded?.Invoke(key, value);
                 return true;
             }
             catch (Exception)
@@ -54,16 +50,16 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Mem.Default
         public TValue Remove(TKey key)
         {
             masterData.Remove(key);
-            var result = childData.TryDequeue(out var value);
+            var result = childData.TryPeek(out var value);
             if (result)
-                ChangedRemoved?.Invoke(value);
+                ChangedRemoved?.Invoke(key, value);
             return value;
         }
         #endregion
 
         #region Changed
-        public event Action<TValue> ChangedAdded;
-        public event Action<TValue> ChangedRemoved;
+        public event Action<TKey, TValue> ChangedAdded;
+        public event Action<TKey, TValue> ChangedRemoved;
         #endregion
     }
 }
