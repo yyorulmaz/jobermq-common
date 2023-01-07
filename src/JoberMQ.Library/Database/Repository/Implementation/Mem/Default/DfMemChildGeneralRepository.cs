@@ -1,6 +1,7 @@
 ﻿using JoberMQ.Library.Database.Repository.Abstraction.Mem;
 using System;
 using System.Collections.Concurrent;
+using System.Linq;
 
 namespace JoberMQ.Library.Database.Repository.Implementation.Mem.Default
 {
@@ -40,6 +41,10 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Mem.Default
         {
             childData.TryGetValue(key, out TValue value);
             return value;
+        }
+        public TValue Get(Func<TValue, bool> filter)
+        {
+            return childData.Values.FirstOrDefault(filter);
         }
         public bool Add(TKey key, TValue value)
         {

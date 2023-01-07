@@ -29,6 +29,7 @@ namespace JoberMQ.Library.Database.Repository.Abstraction.Mem
 
         #region CRUD
         TValue Get(TKey key);
+        TValue Get(Func<TValue, bool> filter);
         bool Add(TKey key, TValue value);
         bool Update(TKey key, TValue value);
         TValue Remove(TKey key);
