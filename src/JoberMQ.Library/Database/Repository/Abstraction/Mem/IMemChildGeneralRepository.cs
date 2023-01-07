@@ -36,6 +36,7 @@ namespace JoberMQ.Library.Database.Repository.Abstraction.Mem
 
         #region Changed
         event Action<TKey, TValue> ChangedAdded;
+        event Action<TKey, TValue> ChangedUpdated;
         event Action<TKey, TValue> ChangedRemoved;
         #endregion
     }
