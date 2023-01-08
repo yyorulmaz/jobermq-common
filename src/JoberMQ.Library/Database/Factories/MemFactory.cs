@@ -7,7 +7,7 @@ namespace JoberMQ.Library.Database.Factories
 {
     public class MemFactory
     {
-        public static IMemRepository<TKey, TValue> Create<TKey, TValue>(MemFactoryEnum memFactory, MemDataFactoryEnum memDataFactory, ConcurrentDictionary<TKey, TValue> masterData)
+        public static IMemRepository<TKey, TValue> Create<TKey, TValue>(MemFactoryEnum memFactory, MemDataFactoryEnum memDataFactory, ConcurrentDictionary<TKey, TValue> masterData = null)
         {
             IMemRepository<TKey, TValue> memRepository;
 
