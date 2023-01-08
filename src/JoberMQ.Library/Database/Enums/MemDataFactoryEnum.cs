@@ -2,6 +2,7 @@
 {
     public enum MemDataFactoryEnum
     {
-        Data = 1
+        None = 1,
+        Data = 2
     }
 }
