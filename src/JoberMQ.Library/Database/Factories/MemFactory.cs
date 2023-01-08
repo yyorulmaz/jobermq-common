@@ -20,7 +20,7 @@ namespace JoberMQ.Library.Database.Factories
                             memRepository = new DfMemRepository<TKey, TValue>(masterData);
                             break;
                         default:
-                            memRepository = new DfMemRepository<TKey, TValue>(masterData);
+                            memRepository = new DfMemRepository<TKey, TValue>();
                             break;
                     }
                     break;
@@ -31,7 +31,7 @@ namespace JoberMQ.Library.Database.Factories
                             memRepository = new DfMemRepository<TKey, TValue>(masterData);
                             break;
                         default:
-                            memRepository = new DfMemRepository<TKey, TValue>(masterData);
+                            memRepository = new DfMemRepository<TKey, TValue>();
                             break;
                     }
                     break;

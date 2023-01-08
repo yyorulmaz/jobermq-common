@@ -13,6 +13,10 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Mem.Default
         {
             this.masterData = masterData;
         }
+        public DfMemRepository()
+        {
+            this.masterData = new ConcurrentDictionary<TKey, TValue>();
+        }
         #endregion
 
         #region Data
