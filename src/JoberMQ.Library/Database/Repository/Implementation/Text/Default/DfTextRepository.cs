@@ -62,7 +62,7 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Text.Default
                 //temp dosyası var ise sildim ve yenisini oluşturdum
                 var tempFile = GetArsiveFileFullPath(0);
                 File.Delete(tempFile);
-                File.Create(tempFile);
+                File.Create(tempFile).Close();
 
                 //grupladığım veriyi temp dosyasına yazdım
                 using (FileStream fs = FileStreamCreate(tempFile, 32768))
