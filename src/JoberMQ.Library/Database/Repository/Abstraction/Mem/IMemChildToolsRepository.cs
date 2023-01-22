@@ -10,8 +10,25 @@ namespace JoberMQ.Library.Database.Repository.Abstraction.Mem
     //    ConcurrentDictionary<TKey, TValue> ChildData { get; }
     //    #endregion
     //}
-    public interface IMemChildGeneralRepository<TKey, TValue>
+    public interface IMemChildToolsRepository<TKey, TValue>
     {
+        #region MasterDataActivite
+        bool IsMasterToChildAdded { get; set; }
+        Func<TValue, bool> IsMasterToChildAddedFilter { get; set; }
+        bool IsMasterToChildUpdated { get; set; }
+        Func<TValue, bool> IsMasterToChildUpdatedFilter { get; set; }
+        bool IsMasterToChildRemoved { get; set; }
+        Func<TValue, bool> IsMasterToChildRemovedFilter { get; set; }
+
+
+        bool IsChildToMasterAdded { get; set; }
+        Func<TValue, bool> IsChildToMasterAddedFilter { get; set; }
+        bool IsChildToMasterUpdated { get; set; }
+        Func<TValue, bool> IsChildToMasterUpdatedFilter { get; set; }
+        bool IsChildToMasterRemoved { get; set; }
+        Func<TValue, bool> IsChildToMasterRemovedFilter { get; set; }
+        #endregion
+
         #region Data
         ConcurrentDictionary<TKey, TValue> ChildData { get; }
         IMemRepository<TKey, TValue> MasterData { get; }
@@ -26,7 +43,7 @@ namespace JoberMQ.Library.Database.Repository.Abstraction.Mem
         TValue Get(Func<TValue, bool> filter);
         bool Add(TKey key, TValue value);
         bool Update(TKey key, TValue value);
-        TValue Remove(TKey key);
+        TValue Remove(TKey key, TValue value);
         #endregion
 
         #region Changed
