@@ -10,22 +10,94 @@ namespace JoberMQ.Library.Database.Factories
 {
     public class MemChildFactory
     {
-        public static IMemChildGeneralRepository<TKey, TValue> CreateChildGeneral<TKey, TValue>(
+        public static IMemChildToolsRepository<TKey, TValue> CreateChildGeneral<TKey, TValue>(
             MemChildFactoryEnum memChildFactoryEnum,
             IMemRepository<TKey, TValue> master,
-            bool isMasterDataActiviteAdded = false, 
-            bool isMasterDataActiviteUpdated = false, 
-            bool isMasterDataActiviteRemoved = false)
+
+            bool isMasterToChildAdded = false,
+            Func<TValue, bool> isMasterToChildAddedFilter = null,
+
+            bool isMasterToChildUpdated = false,
+            Func<TValue, bool> İsMasterToChildUpdatedFilter = null,
+
+            bool isMasterToChildRemoved = false,
+            Func<TValue, bool> isMasterToChildRemovedFilter = null,
+
+            bool isChildToMasterAdded = false,
+            Func<TValue, bool> isChildToMasterAddedFilter = null,
+
+            bool isChildToMasterUpdated = false,
+            Func<TValue, bool> isChildToMasterUpdatedFilter = null,
+
+            bool isChildToMasterRemoved = false,
+            Func<TValue, bool> isChildToMasterRemovedFilter = null)
+        {
+            IMemChildToolsRepository<TKey, TValue> memChildToolsRepository;
+
+            switch (memChildFactoryEnum)
+            {
+                case MemChildFactoryEnum.Default:
+                    memChildToolsRepository = new DfMemChildToolsRepository<TKey, TValue>(
+                        master,
+
+                        isMasterToChildAdded,
+                        isMasterToChildAddedFilter,
+
+                        isMasterToChildUpdated,
+                        İsMasterToChildUpdatedFilter,
+
+                        isMasterToChildRemoved,
+                        isMasterToChildRemovedFilter,
+
+                        isChildToMasterAdded,
+                        isChildToMasterAddedFilter,
+
+                        isChildToMasterUpdated,
+                        isChildToMasterUpdatedFilter,
+
+                        isChildToMasterRemoved,
+                        isChildToMasterRemovedFilter);
+                    break;
+                default:
+                    memChildToolsRepository = new DfMemChildToolsRepository<TKey, TValue>(
+                        master,
+
+                        isMasterToChildAdded,
+                        isMasterToChildAddedFilter,
+
+                        isMasterToChildUpdated,
+                        İsMasterToChildUpdatedFilter,
+
+                        isMasterToChildRemoved,
+                        isMasterToChildRemovedFilter,
+
+                        isChildToMasterAdded,
+                        isChildToMasterAddedFilter,
+
+                        isChildToMasterUpdated,
+                        isChildToMasterUpdatedFilter,
+
+                        isChildToMasterRemoved,
+                        isChildToMasterRemovedFilter);
+                    break;
+            }
+
+            return memChildToolsRepository;
+        }
+
+        public static IMemChildGeneralRepository<TKey, TValue> CreateChildGeneral<TKey, TValue>(
+            MemChildFactoryEnum memChildFactoryEnum,
+            IMemRepository<TKey, TValue> master)
         {
             IMemChildGeneralRepository<TKey, TValue> memChildGeneralRepository;
 
             switch (memChildFactoryEnum)
             {
                 case MemChildFactoryEnum.Default:
-                    memChildGeneralRepository = new DfMemChildGeneralRepository<TKey, TValue>(master, isMasterDataActiviteAdded, isMasterDataActiviteUpdated, isMasterDataActiviteRemoved);
+                    memChildGeneralRepository = new DfMemChildGeneralRepository<TKey, TValue>(master);
                     break;
                 default:
-                    memChildGeneralRepository = new DfMemChildGeneralRepository<TKey, TValue>(master, isMasterDataActiviteAdded, isMasterDataActiviteUpdated, isMasterDataActiviteRemoved);
+                    memChildGeneralRepository = new DfMemChildGeneralRepository<TKey, TValue>(master);
                     break;
             }
 
