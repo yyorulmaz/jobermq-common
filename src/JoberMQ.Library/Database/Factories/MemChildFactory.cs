@@ -10,7 +10,7 @@ namespace JoberMQ.Library.Database.Factories
 {
     public class MemChildFactory
     {
-        public static IMemChildToolsRepository<TKey, TValue> CreateChildGeneral<TKey, TValue>(
+        public static IMemChildToolsRepository<TKey, TValue> CreateChildTools<TKey, TValue>(
             MemChildFactoryEnum memChildFactoryEnum,
             IMemRepository<TKey, TValue> master,
 
