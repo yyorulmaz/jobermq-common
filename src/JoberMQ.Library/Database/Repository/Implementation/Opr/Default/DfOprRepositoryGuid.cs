@@ -37,6 +37,7 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
 
         #region CRUD
         public TValue Get(Guid id) => dbMem.Get(id);
+        public TValue Get(Func<TValue, bool> filter = null) => dbMem.Get(filter);
         public List<TValue> GetAll(Func<TValue, bool> filter = null) => dbMem.GetAll(filter);
         public virtual bool Add(Guid key, TValue dbo)
         {

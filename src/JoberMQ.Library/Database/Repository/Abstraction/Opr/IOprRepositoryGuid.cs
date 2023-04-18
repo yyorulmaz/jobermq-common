@@ -15,6 +15,7 @@ namespace JoberMQ.Library.Database.Repository.Abstraction.Opr
 
         #region CRUD
         TValue Get(Guid id);
+        TValue Get(Func<TValue, bool> filter = null);
         List<TValue> GetAll(Func<TValue, bool> filter = null);
         bool Add(Guid key, TValue dbo);
         bool Update(Guid key, TValue dbo);
