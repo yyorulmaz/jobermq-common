@@ -45,7 +45,8 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
             dbo.DataStatusType = DataStatusTypeEnum.Insert;
             dbo.ProcessTime = processTime;
 
-            dbText.WriteLine(dbo);
+            if (dbo.IsDbTextSave)
+                dbText.WriteLine(dbo);
             dbMem.Add(key, dbo);
             ChangedAdded?.Invoke(dbo);
 
@@ -58,7 +59,8 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
             dbo.DataStatusType = DataStatusTypeEnum.Update;
             dbo.ProcessTime = processTime;
 
-            dbText.WriteLine(dbo);
+            if (dbo.IsDbTextSave)
+                dbText.WriteLine(dbo);
             dbMem.Update(key, dbo);
             ChangedUpdated?.Invoke(dbo);
 
@@ -70,7 +72,8 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
             dbo.DataStatusType = DataStatusTypeEnum.Delete;
             dbo.ProcessTime = processTime;
 
-            dbText.WriteLine(dbo);
+            if (dbo.IsDbTextSave)
+                dbText.WriteLine(dbo);
             dbMem.Remove(key);
             ChangedRemoved?.Invoke(dbo);
 
@@ -113,7 +116,7 @@ namespace JoberMQ.Library.Database.Repository.Implementation.Opr.Default
            => dbText.DataGroupingAndSize();
         public void CreateStream()
             => dbText.CreateStream();
-        
+
 
 
         //public void ImportTextDataToSetMemDb()

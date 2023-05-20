@@ -9,5 +9,6 @@ namespace JoberMQ.Library.Dbos
         public MatchTypeEnum MatchType { get; set; }
         public virtual string ClientKey { get; set; }
         public virtual string ClientGroupKey { get; set; }
+
     }
 }

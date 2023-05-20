@@ -12,6 +12,7 @@ namespace JoberMQ.Library.Database.Base
             IsDelete = false;
             CreateDate = DateHelper.GetUniversalNow();
             ProcessTime = DateHelper.GetUniversalNow();
+            IsDbTextSave = true;
         }
 
         public Guid Id { get; set; }
@@ -28,5 +29,8 @@ namespace JoberMQ.Library.Database.Base
 
         public DateTime ProcessTime { get; set; }
         public DataStatusTypeEnum DataStatusType { get; set; }
+
+
+        public bool IsDbTextSave { get; set; }
     }
 }
