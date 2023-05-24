@@ -9,7 +9,6 @@ namespace JoberMQ.Library.Models.Client
     {
         public ClientTypeEnum ClientType { get; set; }
         public string ClientKey { get; set; }
-        public string ClientGroupKey { get; set; }
         public bool IsOfflineClient { get; set; }
         public bool IsClientActive { get; set; }
     }

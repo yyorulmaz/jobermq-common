@@ -19,8 +19,7 @@ namespace JoberMQ.Library.Helpers
             jobDbo.Operation = builder.Operation;
             jobDbo.Producer = new ProducerModel
             {
-                ClientKey = builder.ClientInfo.ClientKey,
-                ClientGroupKey = builder.ClientInfo.ClientGroupKey
+                ClientKey = builder.ClientInfo.ClientKey
             };
             jobDbo.Info = builder.Info;
             jobDbo.Publisher = builder.Publisher;
@@ -57,8 +56,7 @@ namespace JoberMQ.Library.Helpers
             messageDbo.Operation = builder.Operation;
             messageDbo.Producer = new Library.Models.ProducerModel
             {
-                ClientKey = builder.ClientInfo.ClientKey,
-                ClientGroupKey = builder.ClientInfo.ClientGroupKey
+                ClientKey = builder.ClientInfo.ClientKey
             };
             messageDbo.Message = builder.MultipleMessages.FirstOrDefault().Message;
             messageDbo.IsResult = builder.IsResult;

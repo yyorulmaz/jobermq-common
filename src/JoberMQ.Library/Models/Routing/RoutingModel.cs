@@ -6,9 +6,9 @@ namespace JoberMQ.Library.Models.Routing
     {
         public string DistributorKey { get; set; }
         public string QueueKey { get; set; }
+        public string RoutingKey { get; }
 
         public string ClientKey { get; set; }
-        public string ClientGroupKey { get; set; }
         public string EventName { get; set; }
 
 

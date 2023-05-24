@@ -1,6 +1,6 @@
 ﻿namespace JoberMQ.Library.Enums.Queue
 {
-    public enum MatchTypeEnum
+    public enum QueueMatchTypeEnum
     {
         Special = 1,
         Group = 2,
