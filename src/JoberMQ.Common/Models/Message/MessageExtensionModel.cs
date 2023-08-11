@@ -7,4 +7,5 @@ namespace JoberMQ.Common.Models.Message
         public T Client { get; set; }
         public MessageDbo Message { get; set; }
     }
+    
 }
