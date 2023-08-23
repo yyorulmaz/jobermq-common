@@ -13,7 +13,7 @@ namespace JoberMQ.Common.Dbos
         public bool IsResultMessageClientSend { get; set; }
         public Guid CreatedJobId { get; set; }
 
-        public List<JobTransactionDetailDbo> JobTransactioDetails { get; set; }
+        public List<JobTransactionDetailDbo> JobTransactionDetails { get; set; }
 
     }
 }
